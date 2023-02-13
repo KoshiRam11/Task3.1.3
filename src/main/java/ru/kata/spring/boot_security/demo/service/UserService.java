@@ -72,8 +72,4 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    @Transactional(readOnly = true)
-    public List<Role> listRoles() {
-        return roleRepository.findAll();
-    }
 }

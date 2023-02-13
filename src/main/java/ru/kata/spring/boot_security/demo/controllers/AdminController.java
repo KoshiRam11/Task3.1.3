@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.entities.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 
@@ -13,8 +14,11 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 public class AdminController {
     private final UserService userService;
-    public AdminController(UserService userService) {
+    private final RoleService roleService;
+
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
 
@@ -29,7 +33,7 @@ public class AdminController {
     public String createUserForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        model.addAttribute("listRoles", userService.listRoles());
+        model.addAttribute("listRoles", roleService.listRoles());
         return "admin/create";
     }
     @PostMapping("/create")
@@ -45,7 +49,7 @@ public class AdminController {
     @GetMapping("/update/{id}")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("listRoles", userService.listRoles());
+        model.addAttribute("listRoles", roleService.listRoles());
         return "admin/update";
     }
     @PostMapping("/update")
