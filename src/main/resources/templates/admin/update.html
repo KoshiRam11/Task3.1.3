@@ -8,8 +8,8 @@
 
 </head>
 <body>
-<form action="#" th:action="@{/admin/update}" th:object="${user}"
-      method="post" style="max-width: 600px; margin: 0 auto;">
+<form th:method="PUT" th:action="@{/admin/update}" th:object="${user}"
+     style="max-width: 600px; margin: 0 auto;">
   <h2>Изменение пользователя</h2>
   <label for="id">ID</label>
   <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
